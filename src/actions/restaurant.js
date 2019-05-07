@@ -1,8 +1,8 @@
 import api from '../services/api';
 import { LOAD_RESTAURANTS } from './action_types';
 
-export const loadRestaurants = (category = null) => async (dispatch) => {
-  let response = await api.loadRestaurants(category);
+export const loadRestaurants = (address = null, category = null) => async (dispatch) => {
+  let response = await api.loadRestaurants(address, category);
   dispatch({
     type: LOAD_RESTAURANTS,
     restaurants: response.data.restaurants

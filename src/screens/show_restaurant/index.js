@@ -1,3 +1,5 @@
+import '../../styles/restaurant.scss';
+
 import { Box, Column, Icon, Image, Title } from 'rbx';
 import React, { Component, Fragment } from 'react';
 import { FaStar } from 'react-icons/fa';
@@ -27,12 +29,12 @@ class ShowRestaurant extends Component {
           <Column size={7}>
             <p>{this.state.restaurant.description}</p>
             <footer>
-              <span class="dashed_box">Entrega ${this.state.restaurant.delivery_tax}</span>
+              <span className="dashed_box">Entrega ${this.state.restaurant.delivery_tax}</span>
               <span>
                 <Icon size="medium" color="warning">
                   <FaStar />
                 </Icon>
-                <span class="has-text-warning has-text-weight-bold">{this.state.restaurant.review || 0}</span>
+                <span className="has-text-warning has-text-weight-bold">{this.state.restaurant.review || 0}</span>
               </span>
             </footer>
           </Column>
@@ -40,8 +42,8 @@ class ShowRestaurant extends Component {
       </Box>
 
       {this.state.restaurant.product_categories &&
-        this.state.restaurant.product_categories.map((category, i) => {
-          return <CategoryProducts {...category} key={i} />
+        this.state.restaurant.product_categories.map(category => {
+          return <CategoryProducts restaurant={this.state.restaurant} {...category} />
         })
       }
     </Fragment>
