@@ -1,3 +1,7 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({})
+import RestaurantsReducer from './restaurantsReducer';
+
+export default combineReducers({
+  restaurantsState: RestaurantsReducer
+})
