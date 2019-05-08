@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
 
-import AddressReducer from './addressReducer';
-import ModalReducer from './modalReducer';
-import NewOrderReducer from './newOrderReducer';
+import addressReducer from './addressReducer';
+import modalReducer from './modalReducer';
+import newOrderReducer from './newOrderReducer';
+import orderReducer from './orderReducer';
 import RestaurantsReducer from './restaurantsReducer';
 
 export default combineReducers({
   restaurantsState: RestaurantsReducer,
-  modalState: ModalReducer,
-  addressState: AddressReducer,
-  newOrderState: NewOrderReducer
+  orderState: orderReducer,
+  modalState: modalReducer,
+  addressState: addressReducer,
+  newOrderState: newOrderReducer
 })

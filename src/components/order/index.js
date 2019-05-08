@@ -7,11 +7,12 @@ import { bindActionCreators } from 'redux';
 
 import { hideModal } from '../../actions/modal';
 import { removeOrderItem } from '../../actions/new_order';
+import history from '../../history';
 
 class Order extends Component {
   orderItemAmount = (orderItem) => {
     return orderItem.quantity * orderItem.product.price
-  }
+  } 
 
   totalOrder = () => {
     const arrayToSum = this.props.order.map((orderItem) => { return this.orderItemAmount(orderItem) })
@@ -28,57 +29,58 @@ class Order extends Component {
 
   closeOrder = () => {
     this.props.hideModal('ORDER_MODAL');
+    history.push('/orders/new')
   }
 
   render() {
     console.log(this.props)
-    if (this.props.restaurant == undefined || this.props.order.length <= 0) {
+    if(this.props.restaurant == undefined || this.props.order.length <= 0){
       return (
         <Column size={6} offset={3}>
           <Title size={5} className="has-text-custom-gray-darker">Carrinho Vazio</Title>
           <Title size={6} subtitle className="has-text-custom-gray-darker">Escolha um produto</Title>
-          <br />
+          <br/>
         </Column>
       )
-    } else {
+    } else{
       return (
         <Fragment>
           <Column size={12}>
-
+          
             <div className="order-box">
               <Title size={5} className="has-text-custom-green-darker">Restaurante</Title>
-              <Title size={6}>{this.props.restaurant.name}</Title>
-
+              <Title size={6}>{ this.props.restaurant.name }</Title>
+    
               <hr />
-
-              {this.props.order.map(orderItem => {
-                return <Fragment>
-                  <Column.Group multiline gapless>
-                    <Column size="four-fifths">
-                      <Title size={6} className="has-text-custom-orange">
-                        {orderItem.quantity}x {orderItem.product.name}
-                      </Title>
-                    </Column>
-                    <Column size="one-fifth" className="has-text-weight-bold has-text-right">
-                      r${this.orderItemAmount(orderItem).toFixed(2)}
-                    </Column>
-                    <Column size="three-fifths">
-                      <Title size={7} className="has-text-weight-normal has-text-custom-gray-darker">
-                        {orderItem.product.description}
-                      </Title>
-                    </Column>
-                    <Column size="two-fifth" className="has-text-right">
-                      <button className="dashed_box is-size-7 remove-button"
-                        onClick={() => this.removeItem(orderItem)}>
-                        Remover
+    
+              { this.props.order.map(orderItem => {
+                return  <Fragment>
+                          <Column.Group multiline gapless>
+                            <Column size="four-fifths">
+                              <Title size={6} className="has-text-custom-orange">
+                                { orderItem.quantity}x {orderItem.product.name }
+                              </Title>
+                            </Column>
+                            <Column size="one-fifth" className="has-text-weight-bold has-text-right">
+                              r${ this.orderItemAmount(orderItem).toFixed(2) }
+                            </Column>
+                            <Column size="three-fifths">
+                              <Title size={7} className="has-text-weight-normal has-text-custom-gray-darker">
+                                { orderItem.product.description }
+                              </Title>
+                            </Column>
+                            <Column size="two-fifth" className="has-text-right">
+                              <button className="dashed_box is-size-7 remove-button" 
+                                      onClick={ () => this.removeItem(orderItem) }>
+                                Remover
                               </button>
-                    </Column>
-                  </Column.Group>
-                </Fragment>
-              })}
-
+                            </Column>
+                          </Column.Group>
+                        </Fragment>
+              }) }
+    
               <hr />
-
+    
               <Column.Group className="subtotal">
                 <Column size="three-fifths">
                   <Title size={6} className="has-text-custom-gray-darker">
@@ -87,11 +89,11 @@ class Order extends Component {
                 </Column>
                 <Column size="two-fifths">
                   <Title size={6} className="has-text-custom-gray-darker has-text-right">
-                    r${this.totalOrder().toFixed(2)}
+                    r${ this.totalOrder().toFixed(2) }
                   </Title>
                 </Column>
               </Column.Group>
-
+    
               <Column.Group>
                 <Column size="three-fifths">
                   <Title size={6} className="has-text-custom-gray-darker">
@@ -100,13 +102,13 @@ class Order extends Component {
                 </Column>
                 <Column size="two-fifths">
                   <Title size={6} className="has-text-custom-gray-darker has-text-right">
-                    r${this.props.restaurant.delivery_tax.toFixed(2)}
+                    r${ this.props.restaurant.delivery_tax.toFixed(2) }
                   </Title>
                 </Column>
               </Column.Group>
-
+    
               <hr />
-
+    
               <Column.Group>
                 <Column size="three-fifths">
                   <Title size={6} className="has-text-custom-gray-darker">
@@ -115,15 +117,15 @@ class Order extends Component {
                 </Column>
                 <Column size="two-fifths">
                   <Title size={6} className="has-text-custom-gray-darker has-text-right">
-                    r${this.totalCart().toFixed(2)}
+                    r${ this.totalCart().toFixed(2) }
                   </Title>
                 </Column>
               </Column.Group>
             </div>
           </Column>
-          {this.props.finish_btn_active != false &&
+          { this.props.finish_btn_active != false &&
             <Column size={12} align="center">
-              <Button size="medium" color="custom-orange" className="has-text-white" onClick={() => this.closeOrder()}>
+              <Button size="medium" color="custom-orange" className="has-text-white" onClick={ () => this.closeOrder() }>
                 Finalizar Pedido
               </Button>
             </Column>

@@ -8,13 +8,14 @@ import { bindActionCreators } from 'redux';
 
 import { showModal } from '../../actions/modal';
 import LogoImage from '../../assets/images/logo-v1-horizontal.png';
+import history from '../../history';
 import SearchBox from '../search_box_component';
 
 const Header = (props) => (
   <div className="top-navbar">
     <Container>
       <Navbar>
-        <Navbar.Brand>
+        <Navbar.Brand onClick={e => history.push('/')}>
           <img src={LogoImage} alt="One Bit Food" />
         </Navbar.Brand>
 
