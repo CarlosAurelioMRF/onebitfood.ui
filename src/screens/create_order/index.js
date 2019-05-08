@@ -1,7 +1,7 @@
 import '../../styles/create_order.scss';
 
 import { Box, Column } from 'rbx';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Order from '../../components/order';
 import OrderForm from '../../components/order_form';
